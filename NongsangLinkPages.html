@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="th" class="antialiased">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="icon" type="image/x-icon" href="https://school.nongkhai2.go.th/emis/pic_school/1035430040.jpg">
+		<title>โรงเรียนบ้านหนองแสง — รวมลิงค์</title>
+		
+		<!-- Google Font Sarabun -->
+		<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+		
+		<!-- Tailwind CSS (CDN) -->
+		<script src="https://cdn.tailwindcss.com"></script>
+		
+		<style>
+			:root { --bg-light: linear-gradient(135deg,#fff7f0 0%,#fff3d6 50%,#fff1c2 100%); }
+			html, body { height: 100%; }
+			body {
+			font-family: "Sarabun", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+			margin: 0;
+			min-height: 100vh;
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+			/* background: linear-gradient(135deg,#7f1d1d 0%,#b91c1c 45%,#f59e0b 100%);*/
+			background: linear-gradient(to right, #000000, #152331); /*สีพื้นหลัง Dark Mode*/
+			color: #f8fafc; /*สีตัวหนังสือ*/
+			transition: background .35s ease, color .25s ease;
+			}
+			html.light body {
+			background: var(--bg-light);
+			color: #0f172a;
+			}
+			.card {
+			/*	background: rgba(255,255,255,0.04); */
+			background: #353535;
+			backdrop-filter: blur(6px);
+			border-radius: 12px;
+			padding: 1rem;
+			box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+			}
+			html.light .card {
+			background: rgba(255,255,255,0.92);
+			box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+			}
+			.focus-ring:focus {
+			outline: 3px solid rgba(255,255,255,0.12);
+			outline-offset: 3px;
+			}
+			html.light .focus-ring:focus {
+			outline: 3px solid rgba(15,23,42,0.12);
+			}
+			.container { max-width: 980px; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem; }
+			/* Ensure select text visible across browsers */
+			select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+			/* small caret indicator */
+			.select-wrap { position: relative; 
+			color: #000000;
+			}
+			.select-wrap::after {
+			color: #ffd54f;
+			content: "▾";
+			position: absolute;
+			right: 12px;
+			top: 50%;
+			transform: translateY(-50%);
+			pointer-events: none;
+			color: inherit;
+			opacity: 0.9; 
+			}
+		</style>
+		
+	</head>
+	<body>
+		
+		<div class="container flex flex-col min-h-screen">
+			<header class="w-full py-2 flex flex-col items-center">
+				<div class="w-full flex flex-col items-center">
+					<a href="https://www.youtube.com/@NongsangSchool.YST1" target="_blank">
+					<img src="https://nongyoenq.github.io/NongsangSchool-SendTasks/NongsangSchool-LOGO1-ver.png" width="350px" height="auto">
+					</a>
+				</div>
+				<h1 class="text-center text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">🏫 โรงเรียนบ้านหนองแสง</h1>
+				<div class="text-center space-y-1">
+					<h2 class="text-lg sm:text-xl text-opacity-90">🔗 รวมลิงค์ไปยังระบบต่างๆ ของ โรงเรียนบ้านหนองแสง</h2>
+					<h3 class="text-sm sm:text-base text-opacity-80">📌 สพป. ยโสธร เขต 1</h3>
+				</div>
+			</header>
+			
+			<main class="flex-1 flex items-start justify-center pb-8">
+				<section class="w-full max-w-xl card">
+					<div class="mb-4 text-center">
+						<p class="text-sm sm:text-base">เลือกระบบที่ต้องการจากเมนูด้านล่าง แล้วกดปุ่ม <span class="font-semibold">GO! 🚀</span></p>
+					</div>
+					
+					<form id="linkForm" class="flex flex-col gap-3" onsubmit="return goToLink()">
+						<label for="pageSelect" class="sr-only">เลือกหน้าเพจ</label>
+						
+						<div class="select-wrap">
+							<select id="pageSelect" aria-label="เลือกหน้าเพจ"
+							class="w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition">
+								<option value="index.html">🏠 หน้าแรก</option>
+								<option value="https://nongyoenq.github.io/NongsangSchool-RT-NT-2568/">ℹ️ สรุปผลการทดสอบ RT ชั้น ป. 1 และ NT ชั้น ป. 3 ปีการศึกษา 2568</option>
+								<option value="https://nongyoenq.github.io/NongsangSchool-ONET-Report2568/">👩‍🏫 สรุปผลการทดสอบ O-NET ชั้น ป. 6 ปีการศึกษา 2568</option>
+								<option value="https://nongyoenq.github.io/NongsangSchool-CompetFood/">📚 การแข่งขันทําอาหารคาวหวานเพื่อสุขภาพเชิงธุรกิจ ระดับชั้น ป.4-ป.6 ระดับเขต</option>
+								<option value="https://nongyoenq.github.io/NongsangSchool-EsanCompet73rd/">📰 สรุปผลการแข่งขันศิลปหัตถกรรมนักเรียน ครั้งที่ 73 ปีการศึกษา 2568</option>
+								<option value="https://nongyoenq.github.io/NongsangSchool-TranscriptService2568/">🏆 ระบบดูผลการเรียนออนไลน์ ปีการศึกษา 2568</option>
+								<option value="https://nongyoenq.github.io/NongsangSchool-SendTasks/">📷 ส่งไฟล์ ปพ.5 + รายงานโครงการ + SAR ครูผู้สอน</option>
+								<option value="https://linktr.ee/NongZangYST1">📞 ระบบงานธุรการโรงเรียน</option>
+								<!--
+									<option value="e-learning.html">💻 ระบบ e-Learning</option>
+									<option value="student-portal.html">🧑‍🎓 พอร์ทนักเรียน</option>
+									<option value="teacher-portal.html">🧑‍🏫 พอร์ทครู</option>
+								-->
+							</select>
+						</div>
+						
+						<div class="mt-2">
+							<button id="goButton" type="submit"
+							class="w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring"
+							aria-label="ไปยังหน้าเพจที่เลือก">
+								GO! 🚀
+							</button>							
+							
+						</div>
+						<div class="mt-auto text-center">
+						<button type="reset" value="Reset" class="font-extrabold hover:bg-red-500">
+						CLEVR 🔄</button>
+						</div>
+												
+						<div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+							<a href="https://www.facebook.com/NongsangSchool.yst1/" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition" target="_blank">📰 ข่าวล่าสุด</a>
+							<a href="?calendar.html" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition"  >📅 ปฏิทินกิจกรรม</a>
+							<a href="mailto: nongsangschool.yst1@gmail.com" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition">📞 ติดต่อ</a>
+							<a href="https://www.facebook.com/NongsangSchool.yst1/photos_by" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition"  target="_blank">📷 แกลเลอรี</a>
+							<a href="?achievements.html" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition"  >🏆 รางวัล</a>
+							<a href="https://school.yst1.go.th/index_view_history.php?School_ID=1035430040&page=history" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition "  target="_blank">🏫 ประวัติโรงเรียน</a>
+						</div>
+					</form>
+					
+					<div class="mt-5 flex items-center justify-between gap-3">
+						<p class="text-xs opacity-80">Tip: กด <span class="font-semibold">GO!</span> หรือกด Enter เพื่อไปยังหน้าที่เลือก</p>
+						<div class="flex items-center gap-2">
+							<span class="ml-2 text-sm">เปลี่ยนโหมด 👉</span>
+							<button id="darkToggle" class="px-3 py-2 rounded-md bg-white/6 hover:bg-white/10 transition focus-ring" aria-pressed="true" aria-label="สลับโหมดมืด/สว่าง">
+								<span id="darkIcon">🌙</span>
+							</button>
+						</div>
+					</div>
+				</section>
+			</main>
+			
+			<footer class="w-full text-center py-4 mt-auto">
+				<p class="text-sm opacity-90">Copyleft © 2026  <a href="https://www.facebook.com/Nongyoenq.Studios" class="hover:text-pink-400"><b>Nongyoenq Studios</b></a> Ltd.</p> 
+				<p class="text-xs opacity-50">Powered by <b><a href="https://www.youtube.com/@bayoenq">bayoenq</a></b></p>
+			</footer>
+			
+		</div>
+		
+		<script>
+			(function () {
+				const htmlEl = document.documentElement;
+				const darkToggle = document.getElementById('darkToggle');
+				const darkIcon = document.getElementById('darkIcon');
+				const pageSelect = document.getElementById('pageSelect');
+				const goButton = document.getElementById('goButton');
+				
+				// Apply saved theme or default to dark
+				const savedTheme = localStorage.getItem('nbns_theme');
+				const isLight = savedTheme === 'light';
+				if (isLight) {
+					htmlEl.classList.add('light');
+					darkIcon.textContent = '🌞 Light Mode';
+					} else {
+					htmlEl.classList.remove('light');
+					darkIcon.textContent = '🌙 Dark Mode';
+				}
+				
+				// Function to update select & button styles based on theme
+				function updateControlsForTheme() {
+					const light = htmlEl.classList.contains('light');
+					
+					// Select styling
+					if (light) {
+						pageSelect.className = 'w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition bg-yellow-45 text-black';
+						goButton.className = 'w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring';
+						} else {
+						pageSelect.className = 'w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition bg-white text-black';
+						goButton.className = 'w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring';
+					}
+				}
+				
+				// Initial update
+				updateControlsForTheme();
+				
+				// Toggle theme
+				darkToggle.addEventListener('click', () => {
+					const nowLight = htmlEl.classList.toggle('light');
+					localStorage.setItem('nbns_theme', nowLight ? 'light' : 'dark');
+					darkIcon.textContent = nowLight ? '🌞 Light Mode' : '🌙 Dark Mode';
+					updateControlsForTheme();
+				});
+				
+				// Navigation function
+				window.goToLink = function () {
+					const url = pageSelect.value || 'home.html';
+					// navigate
+					window.location.href = url;
+					return false;
+				};
+				
+				// Enter key on select triggers GO
+				pageSelect.addEventListener('keydown', (e) => {
+					if (e.key === 'Enter') {
+						e.preventDefault();
+						goButton.click();
+					}
+				});
+				
+				// Ensure selected option persists visually (optional)
+				const savedPage = localStorage.getItem('nbns_selected_page');
+				if (savedPage) {
+					for (const opt of pageSelect.options) {
+						if (opt.value === savedPage) { opt.selected = true; break; }
+					}
+				}
+				pageSelect.addEventListener('change', () => {
+					localStorage.setItem('nbns_selected_page', pageSelect.value);
+				});
+			})();
+		</script>
+	</body>
+</html>
