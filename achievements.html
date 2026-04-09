@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="https://school.nongkhai2.go.th/emis/pic_school/1035430040.jpg">
+  <title>รางวัลและเกียรติบัตร - โรงเรียนบ้านหนองแสง</title>
+
+  <!-- ฟอนต์และสไตล์หลัก -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent-1: #C13B1B;
+      --accent-2: #D35230;
+      --accent-3: #ED6C47;
+      --bg: #0f1724;
+      --card-bg: #0f172a;
+      --muted: #9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, #071026 0%, #071226 60%);
+      color:#e6eef8;
+      padding:32px;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;}
+    .brand{display:flex;gap:12px;align-items:center;}
+    .logo{width:56px;height:56px;border-radius:12px;background: linear-gradient(135deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow: 0 6px 18px rgba(164,55,142,0.18);flex-shrink:0;}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.2px}
+    .brand p{margin:0;font-size:13px;color:var(--muted)}
+    .controls{display:flex;gap:12px;align-items:center;}
+    .btn{background:linear-gradient(90deg,var(--accent-2),var(--accent-1));border:none;color:white;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;box-shadow: 0 6px 18px rgba(104,31,104,0.18);}
+    .file-input{display:none;}
+    .search{background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:var(--muted);min-width:220px;}
+    main.gallery{margin-top:12px;display:grid;grid-template-columns: repeat(auto-fill, minmax(220px,1fr));gap:16px;align-items:start;flex:1 0 auto;}
+    .card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);box-shadow: 0 8px 24px rgba(3,6,23,0.6);display:flex;flex-direction:column;gap:10px;min-height:160px;}
+    .thumb{height:140px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,var(--accent-3),rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;}
+    .thumb img{max-width:100%; max-height:100%; object-fit:contain; display:block}
+    .meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .title{font-weight:600;font-size:14px}
+    .type{font-size:12px;color:var(--muted)}
+    .card .actions{display:flex;gap:8px}
+    .small-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:6px 8px;border-radius:8px;cursor:pointer;font-size:13px;}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60;padding:24px;}
+    .modal.open{display:flex}
+    .modal-content{width:min(1100px,96%);height:min(80vh,900px);background:linear-gradient(180deg,#071226, #08142a);border-radius:12px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:8px;}
+    .modal-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .modal-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .modal-body iframe, .modal-body img{width:100%;height:100%;border:0;border-radius:8px;object-fit:contain}
+    footer.site-footer{margin-top:20px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.03);display:flex;justify-content:center;align-items:center;color:var(--muted);font-size:14px;font-weight:600;}
+    @media (max-width:640px){ .brand h1{font-size:16px} .thumb{height:120px} }
+  </style>
+</head>
+<body>
+
+  <!-- Header ของเว็บ: โลโก้และชื่อ -->
+  <header class="site-header">
+    <div class="brand">
+      <div style="font-size: 48px;">🏆</div>
+      <div>
+        <h1>รางวัลและเกียรติบัตร</h1>
+        <p>แกลเลอรีแสดงผลงานและใบประกาศ</p>
+      </div>	  
+    </div>
+	<img src="https://nongyoenq.github.io/NongsangSchool-SendTasks/NongsangSchool-LOGO1-ver.png" width="auto" height="120px">
+
+    <!-- Controls: ปุ่มอัปโหลดและช่องค้นหา -->
+    <div class="controls">
+      <input id="fileInput" class="file-input" type="file" accept="image/*,application/pdf" multiple>
+      <label for="fileInput" class="btn" title="อัปโหลดรูปหรือ PDF">อัปโหลดไฟล์</label>
+
+      <input id="search" class="search" placeholder="ค้นหา ชื่อหรือประเภท (เช่น PDF, ใบประกาศ)">
+    </div>
+  </header>
+
+  <!-- Main gallery: จะเติมการ์ดไฟล์ที่อัปโหลด -->
+  <main class="gallery" id="gallery"></main>
+
+  <!-- Modal สำหรับแสดง preview ของรูปหรือ PDF -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-toolbar">
+        <div id="modalTitle" style="font-weight:600"></div>
+        <div>
+          <button id="downloadBtn" class="small-btn">ดาวน์โหลด</button>
+          <button id="closeModal" class="small-btn">ปิด</button>
+        </div>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Footer: ข้อความ semi-bold ตามคำขอ -->
+  <footer class="site-footer">
+    2026 Copyright Powered by bayoenq
+  </footer>
+
+  <!-- ===========================
+       โหลด PDF.js จาก CDN
+       =========================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    // ตั้ง worker ของ PDF.js (ชี้ไปที่ worker บน CDN)
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+  </script>
+
+  <script>
+    /* ===========================
+       ตัวแปรหลักและการตั้งค่า
+       =========================== */
+    const fileInput = document.getElementById('fileInput'); // ช่องอัปโหลดไฟล์
+    const gallery = document.getElementById('gallery');     // พื้นที่แสดงการ์ด
+    const modal = document.getElementById('modal');         // modal preview
+    const modalBody = document.getElementById('modalBody'); // เนื้อหา modal
+    const modalTitle = document.getElementById('modalTitle');
+    const closeModal = document.getElementById('closeModal');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const searchInput = document.getElementById('search');
+
+    // เก็บรายการไฟล์ที่อัปโหลด (object: {id, file, url, type, name, thumbnail})
+    let items = [];
+
+    /* ===========================
+       ฟังก์ชันช่วยเหลือ
+       =========================== */
+    function uid() { return Math.random().toString(36).slice(2,9); }
+
+    // ป้องกัน XSS ในชื่อไฟล์ก่อนแสดง
+    function escapeHtml(text){
+      return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
+    }
+
+    // สร้างการ์ดใน gallery สำหรับ item หนึ่ง
+    function createCard(item){
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.id = item.id;
+
+      // ส่วน thumbnail
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb';
+
+      if(item.type === 'pdf'){
+        // ถ้ามี thumbnail ที่เรนเดอร์แล้ว ให้แสดงเป็นรูป
+        if(item.thumbnail){
+          const img = document.createElement('img');
+          img.src = item.thumbnail;
+          img.alt = item.name;
+          thumb.appendChild(img);
+        } else {
+          // ถ้ายังไม่มี thumbnail ให้แสดงไอคอน PDF แบบ fallback
+          thumb.innerHTML = `
+            <div style="text-align:center;color:var(--muted);padding:12px">
+              <div style="font-weight:600;color:var(--accent-2)">PDF</div>
+            </div>`;
+        }
+      } else {
+        // ถ้าเป็นรูป ให้แสดง preview
+        const img = document.createElement('img');
+        img.src = item.url;
+        img.alt = item.name;
+        thumb.appendChild(img);
+      }
+
+      // ส่วนเมต้า: ชื่อและประเภท
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = `<div>
+                          <div class="title">${escapeHtml(item.name)}</div>
+                          <div class="type">${item.type.toUpperCase()}</div>
+                        </div>`;
+
+      // ปุ่มการกระทำ: ดู, ดาวน์โหลด, ลบ
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+      actions.innerHTML = `
+        <div style="display:flex;gap:8px">
+          <button class="small-btn" data-action="view">ดู</button>
+          <a class="small-btn" data-action="download" href="${item.url}" download="${item.name}">ดาวน์โหลด</a>
+          <button class="small-btn" data-action="remove">ลบ</button>
+        </div>`;
+
+      card.appendChild(thumb);
+      card.appendChild(meta);
+      card.appendChild(actions);
+
+      // event delegation สำหรับปุ่มในการ์ด
+      actions.addEventListener('click', (e)=>{
+        const action = e.target.getAttribute('data-action');
+        if(!action) return;
+        if(action === 'view') openModal(item);
+        if(action === 'remove') removeItem(item.id);
+      });
+
+      return card;
+    }
+
+    // เปิด modal เพื่อแสดง preview
+    function openModal(item){
+      modalTitle.textContent = item.name;
+      modalBody.innerHTML = '';
+      downloadBtn.onclick = ()=>{ downloadFile(item); };
+
+      if(item.type === 'pdf'){
+        // แสดง PDF ด้วย iframe (ใช้ URL.createObjectURL หรือ URL ที่เก็บไว้)
+        const iframe = document.createElement('iframe');
+        iframe.src = item.url;
+        iframe.style.border = 'none';
+        modalBody.appendChild(iframe);
+      } else {
+        const img = document.createElement('img');
+        img.src = item.url;
+        img.alt = item.name;
+        modalBody.appendChild(img);
+      }
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    // ดาวน์โหลดไฟล์ (เรียกผ่านลิงก์)
+    function downloadFile(item){
+      const a = document.createElement('a');
+      a.href = item.url;
+      a.download = item.name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    // ลบ item ออกจาก gallery และ revoke URL
+    function removeItem(id){
+      const idx = items.findIndex(i=>i.id===id);
+      if(idx === -1) return;
+      // revoke object URL ถ้ามี
+      try{ if(items[idx].url && items[idx].url.startsWith('blob:')) URL.revokeObjectURL(items[idx].url); }catch(e){}
+      // ล้าง thumbnail data URL (ไม่จำเป็นแต่ช่วยให้ GC)
+      items.splice(idx,1);
+      renderGallery();
+    }
+
+    // แสดง gallery ตาม items และ filter (ถ้ามี)
+    function renderGallery(filterText = ''){
+      gallery.innerHTML = '';
+      const filtered = items.filter(it=>{
+        if(!filterText) return true;
+        return it.name.toLowerCase().includes(filterText.toLowerCase()) || it.type.includes(filterText.toLowerCase());
+      });
+      if(filtered.length === 0){
+        gallery.innerHTML = `<div style="grid-column:1/-1;padding:28px;text-align:center;color:var(--muted)">ยังไม่มีไฟล์ที่ตรงกับการค้นหา</div>`;
+        return;
+      }
+      filtered.forEach(it=>{
+        gallery.appendChild(createCard(it));
+      });
+    }
+
+    /* ===========================
+       ฟังก์ชันเรนเดอร์ thumbnail ของ PDF ด้วย PDF.js
+       - รับไฟล์หรือ URL แล้วเรนเดอร์หน้าแรกเป็น dataURL
+       - callback(thumbnailDataUrl) เมื่อเสร็จ
+       =========================== */
+    function renderPdfThumbnailFromUrl(url, maxWidth = 600){
+      return pdfjsLib.getDocument(url).promise
+        .then(pdf => pdf.getPage(1))
+        .then(page => {
+          const viewport = page.getViewport({ scale: 1 });
+          // ปรับ scale ให้ความกว้างไม่เกิน maxWidth
+          const scale = Math.min(1, maxWidth / viewport.width);
+          const scaledViewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.width = Math.floor(scaledViewport.width);
+          canvas.height = Math.floor(scaledViewport.height);
+          const renderContext = {
+            canvasContext: context,
+            viewport: scaledViewport
+          };
+          return page.render(renderContext).promise.then(()=>{
+            // แปลงเป็น data URL เพื่อใช้เป็น thumbnail
+            const dataUrl = canvas.toDataURL('image/png');
+            return dataUrl;
+          });
+        })
+        .catch(err=>{
+          console.warn('ไม่สามารถเรนเดอร์ PDF thumbnail:', err);
+          return null;
+        });
+    }
+
+    /* ===========================
+       อีเวนต์หลัก: อัปโหลดไฟล์
+       - ถ้าเป็น PDF จะสร้าง objectURL แล้วเรียก PDF.js เพื่อเรนเดอร์ thumbnail
+       - เก็บ thumbnail ใน item.thumbnail
+       =========================== */
+    fileInput.addEventListener('change', async (e)=>{
+      const files = Array.from(e.target.files);
+      for(const f of files){
+        const id = uid();
+        const ext = f.name.split('.').pop().toLowerCase();
+        const isPdf = ext === 'pdf';
+        const url = URL.createObjectURL(f); // ใช้สำหรับ preview และ iframe
+        const item = {
+          id,
+          file: f,
+          url,
+          type: isPdf ? 'pdf' : 'image',
+          name: f.name,
+          thumbnail: null // จะถูกเติมเมื่อเรนเดอร์เสร็จ
+        };
+        items.unshift(item); // เพิ่มไว้ด้านหน้า
+        renderGallery(searchInput.value.trim());
+
+        // ถ้าเป็น PDF ให้เรนเดอร์หน้าแรกเป็น thumbnail
+        if(isPdf){
+          // เรียก PDF.js เพื่อเรนเดอร์หน้าแรก
+          const thumb = await renderPdfThumbnailFromUrl(url, 800);
+          if(thumb){
+            // เก็บ thumbnail (data URL) ใน item
+            const idx = items.findIndex(i=>i.id===id);
+            if(idx !== -1){
+              items[idx].thumbnail = thumb;
+              renderGallery(searchInput.value.trim());
+            }
+          }
+        }
+      }
+      // รีเซ็ต input เพื่อให้สามารถอัปโหลดไฟล์เดิมซ้ำได้
+      fileInput.value = '';
+    });
+
+    // ปิด modal
+    closeModal.addEventListener('click', ()=>{
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      modalBody.innerHTML = '';
+    });
+
+    // คลิกนอก modal ปิดได้
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        modalBody.innerHTML = '';
+      }
+    });
+
+    // ค้นหาแบบเรียลไทม์
+    searchInput.addEventListener('input', (e)=>{
+      renderGallery(e.target.value.trim());
+    });
+
+    // ตัวอย่างเริ่มต้น (optional)
+    (function seedExample(){
+      const sampleImg = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
+          <rect width="100%" height="100%" fill="#A4378E"/>
+          <text x="50%" y="50%" font-size="36" fill="#fff" text-anchor="middle" dominant-baseline="middle">ตัวอย่าง ใบประกาศ</text>
+        </svg>`
+      );
+      items.push({id:uid(), file:null, url:sampleImg, type:'image', name:'ตัวอย่าง-ใบประกาศ.png', thumbnail: null});
+      renderGallery();
+    })();
+  </script>
+</body>
+</html>
