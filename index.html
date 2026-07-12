@@ -13,7 +13,8 @@
 		<script src="https://cdn.tailwindcss.com"></script>
 		
 		<style>
-			:root { --bg-light: linear-gradient(135deg,#fff7f0 0%,#fff3d6 50%,#fff1c2 100%); }
+			/*:root { --bg-light: linear-gradient(135deg,#fff7f0 0%,#fff3d6 50%,#fff1c2 100%); }*/
+			:root { --bg-light: linear-gradient(to right, #fffcdc, #d9a7c7);}
 			html, body { height: 100%; }
 			body {
 			font-family: "Sarabun", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -39,7 +40,8 @@
 			box-shadow: 0 6px 18px rgba(2,6,23,0.45);
 			}
 			html.light .card {
-			background: rgba(255,255,255,0.92);
+			/* background: rgba(255,255,255,0.92);*/
+			background: linear-gradient(to right, #ffffff, #ece9e6); /*พื้นหลัง card light-mode*/
 			box-shadow: 0 6px 18px rgba(2,6,23,0.06);
 			}
 			.focus-ring:focus {
@@ -66,7 +68,7 @@
 			pointer-events: none;
 			color: inherit;
 			opacity: 0.9; 
-			}
+			}			
 		</style>
 		
 	</head>
@@ -83,7 +85,7 @@
 				<div class="text-center space-y-1">
 					<h2 class="text-lg sm:text-xl text-opacity-90">🔗 รวมลิงค์ไปยังระบบต่างๆ ของ โรงเรียนบ้านหนองแสง</h2>
 					<h3 class="text-sm sm:text-base text-opacity-80">📌 สำนักงานเขตพื้นที่การศึกษาประถมศึกษายโสธร เขต 1</h3>
-					<pre class="text-xs opacity-20">VERSION "OsX 0.1"</pre>
+					<pre class="text-xs opacity-20">VERSION "OsX 0.2"</pre>
 				</div>
 			</header>
 			
@@ -118,25 +120,25 @@
 						</div>
 						
 						<div class="mt-2">
-							<button id="goButton" type="submit"
-							class="w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring"
-							aria-label="ไปยังหน้าเพจที่เลือก">
+							<button id="goButton" type="submit">
+							<!--class="w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring"
+							aria-label="ไปยังหน้าเพจที่เลือก"-->
 								GO! 🚀
 							</button>							
 							
 						</div>
 						<div class="mt-auto text-center">
-						<button type="reset" value="Reset" class="font-extrabold hover:bg-red-500">
-						CLEVR 🔄</button>
+						<button type="reset" value="Reset" class="font-extrabold hover:bg-gradient-to-r from-amber-400 via-pink-500 to-red-500 hover:text-white">
+						CLΞΛR 🔄</button>
 						</div>
 												
 						<div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
-							<a href="https://www.facebook.com/NongsangSchool.yst1/" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition" target="_blank">📰 ข่าวล่าสุด</a>
-							<a href="#calendar.html" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition"  >📅 ปฏิทินกิจกรรม</a>
-							<a href="mailto: nongsangschool.yst1@gmail.com" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition">📞 ติดต่อ</a>
-							<a href="https://www.facebook.com/NongsangSchool.yst1/photos" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition"  target="_blank">📷 แกลเลอรี</a>
-							<a href="achievements.html" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition"  >🏆 รางวัล/เกียรติบัตร</a>
-							<a href="https://school.yst1.go.th/index_view_history.php?School_ID=1035430040&page=history" class="text-center py-2 rounded-md bg-transparent hover:bg-gray-400 transition "  target="_blank">🏫 ประวัติโรงเรียน</a>
+							<a href="https://www.facebook.com/NongsangSchool.yst1/" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy" target="_blank">📰 ข่าวล่าสุด</a>
+							<a href="#calendar.html" class="text-center py-2 rounded-md bg-transparen transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy">📅 ปฏิทินกิจกรรม</a>
+							<a href="mailto: nongsangschool.yst1@gmail.com" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy">📞 ติดต่อ</a>
+							<a href="https://www.facebook.com/NongsangSchool.yst1/photos" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  target="_blank">📷 แกลเลอรี</a>
+							<a href="achievements.html" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  >🏆 รางวัล/เกียรติบัตร</a>
+							<a href="https://school.yst1.go.th/index_view_history.php?School_ID=1035430040&page=history" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  target="_blank">🏫 ประวัติโรงเรียน</a>
 						</div>
 					</form>
 					
@@ -144,8 +146,8 @@
 						<p class="text-xs opacity-80">Tip: กด <span class="font-semibold">GO!</span> หรือกด Enter เพื่อไปยังหน้าที่เลือก</p>
 						<div class="flex items-center gap-2">
 							<span class="ml-2 text-sm">เปลี่ยนโหมด 👉</span>
-							<button id="darkToggle" class="px-3 py-2 rounded-md bg-white/6 hover:bg-white/10 transition focus-ring" aria-pressed="true" aria-label="สลับโหมดมืด/สว่าง">
-								<span id="darkIcon" class="px-3 py-2 rounded-md bg-black/6 hover:bg-black/10 transition focus-ring" aria-pressed="true" aria-label="สลับโหมดมืด/สว่าง">🌙</span>
+							<button id="darkToggle"><!-- class="px-3 py-2 rounded-md bg-black hover:bg-white/50 hover:text-white transition focus-ring" aria-pressed="true" aria-label="สลับโหมดมืด/สว่าง"-->
+								<span id="darkIcon">🌙</span>
 							</button>
 						</div>
 					</div>
@@ -184,11 +186,13 @@
 					
 					// Select styling
 					if (light) {
-						pageSelect.className = 'w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition bg-yellow-45 text-black';
-						goButton.className = 'w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring';
+						pageSelect.className = 'w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition bg-slate-100 text-black';
+						goButton.className = 'w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-gradient-to-r from-amber-400 via-pink-500 to-red-500 hover:text-white transition focus-ring';
+						darkToggle.className = 'px-3 py-2 rounded-md text-black bg-white/50 hover:bg-black hover:text-white transition focus-ring';
 						} else {
 						pageSelect.className = 'w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition bg-white text-black';
-						goButton.className = 'w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring';
+						goButton.className = 'w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-red-500 hover:text-white transition focus-ring';
+						darkToggle.className = 'px-3 py-2 rounded-md text-white bg-black/50 hover:bg-white hover:text-black transition focus-ring';
 					}
 				}
 				
@@ -199,7 +203,7 @@
 				darkToggle.addEventListener('click', () => {
 					const nowLight = htmlEl.classList.toggle('light');
 					localStorage.setItem('nbns_theme', nowLight ? 'light' : 'dark');
-					darkIcon.textContent = nowLight ? '🌞 Light Mode' : '🌙 Dark Mode';
+					darkIcon.textContent = nowLight ? '🌙 Dark Mode' : '🌞 Light Mode';
 					updateControlsForTheme();
 				});
 				
