@@ -22,7 +22,7 @@
 		</header>
 		
 		<div class="max-w-6xl mx-auto bg-white/20 backdrop-blur-sm p-2 rounded-2xl shadow-xl border border-white/100 mb-10 flex flex-col md:flex-row gap-4 items-center justify-between">
-			<div class="w-full md:w-1/3 relative">
+			<div class="w-full md:w-1/4 relative">
 				<input type="text" id="search-input" placeholder="🔍 ค้นหาชื่อครู, ชื่องาน, หรือรายละเอียด..." 
 				class="w-full pl-4 pr-4 py-2.5 bg-slate-50/50 border border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-slate-700 transition-all">
 			</div>
@@ -32,6 +32,14 @@
 					<span class="text-sm text-slate-600 font-semibold whitespace-nowrap">หมวดหมู่:</span>
 					<select id="filter-select" class="w-full sm:w-auto bg-slate-50 border border-purple-200 rounded-xl px-8 py-2.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
 						<option value="all">ทั้งหมด 📁</option>
+					</select>
+				</div>
+				
+				<!-- 👤 🌟 เพิ่ม Dropdown คัดกรองชื่อครูผู้รับผิดชอบ -->
+				<div class="flex items-center gap-2 w-full sm:w-auto">
+					<span class="text-sm text-slate-600 font-semibold whitespace-nowrap">ครูผู้รับผิดชอบ:</span>
+					<select id="teacher-select" class="w-full sm:w-auto bg-slate-50 border border-purple-200 rounded-xl px-4 py-2.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+						<option value="all">ทุกคน 👤</option>
 					</select>
 				</div>
 				
@@ -52,7 +60,7 @@
 		<footer class="text-center py-6 mt-10 text-gray-700">
 			<div>Powered by <a href="https://github.com/nongyoenq" target="_blank" class="hover:text-red-600"><b>bayoenq</b></a><br>
 			© 2026 <a href="https://www.facebook.com/Nongyoenq.Studios" target="_blank" class="hover:text-fuchsia-600"><b>Nongyoenq Studios</b></a>, Ltd.</div>
-			<pre class="text-xs text-slate-500">V3R510N <b>əʃþƒɑ 0.2</b></pre>
+			<pre class="text-xs text-slate-500">V3R510N <b>əʃþƒɑ 0.4</b></pre>
 		</footer>
 		
 		<script>
@@ -64,8 +72,9 @@
 			.then(data => {
 				localDataArray = data;
 				
-				// 1. ดึงข้อมูล Category ไปใส่ใน Filter Dropdown อัตโนมัติ
+				// 1. ดึงข้อมูล Categoryและชื่อครูผู้รับผิด ไปใส่ใน Filter Dropdown อัตโนมัติ
 				generateCategoryFilter(data);
+				generateTeacherFilter(data);
 				
 				// 2. สั่งแสดงผลเว็บครั้งแรก
 				filterAndRenderGrid();
@@ -74,6 +83,7 @@
 				document.getElementById('search-input').addEventListener('input', filterAndRenderGrid);
 				document.getElementById('filter-select').addEventListener('change', filterAndRenderGrid);
 				document.getElementById('sort-select').addEventListener('change', filterAndRenderGrid);
+				document.getElementById('teacher-select').addEventListener('change', filterAndRenderGrid);
 			})
 			.catch(err => {
 				console.error('Error fetching data:', err);
@@ -110,12 +120,26 @@
 				});
 			} 
 			
+			// 🌟 ฟังก์ชันสร้างรายชื่อคุณครูผู้รับผิดชอบใส่ใน Dropdown โดยอัตโนมัติจากข้อมูลในตาราง
+			function generateTeacherFilter(data) {
+				const teacherSelect = document.getElementById('teacher-select');
+				const teachers = [...new Set(data.map(item => item.NameTeacher).filter(teacher => teacher))];
+				
+				teachers.forEach(teacher => {
+					const option = document.createElement('option');
+					option.value = teacher;
+					option.textContent = teacher;
+					teacherSelect.appendChild(option);
+				});
+			}
+			
 			// ฟังก์ชันหลักที่ใช้จัดการ Search, Filter และ Sort พร้อมกัน
 			function filterAndRenderGrid() {
 				const searchTerm = document.getElementById('search-input').value.toLowerCase();
 				const selectedCat = document.getElementById('filter-select').value;
 				const sortBy = document.getElementById('sort-select').value;
 				const grid = document.getElementById('portfolio-grid');
+				const selectedTeacher = document.getElementById('teacher-select').value; // 🌟 ดึงค่าชื่อครูที่เลือก
 				
 				// กรองข้อมูล (Search, Category Filter และครอบคลุมถึงชื่อครูด้วย)
 				let processedData = localDataArray.filter(item => {
@@ -125,9 +149,12 @@
 					(item.Category && item.Category.toLowerCase().includes(searchTerm)) || 
 					(item.NameTeacher && item.NameTeacher.toLowerCase().includes(searchTerm)); // 🌟 เพิ่มส่วนค้นหาจากชื่อครู
 					
-					const matchesCategory = (selectedCat === 'all' || item.Category === selectedCat);					
+					const matchesCategory = (selectedCat === 'all' || item.Category === selectedCat);
 					
-					return matchesSearch && matchesCategory;
+					// 🌟 เพิ่มเงื่อนไขตรวจสอบว่าชื่อครูตรงกับที่เลือกใน Dropdown หรือไม่
+					const matchesTeacher = (selectedTeacher === 'all' || item.NameTeacher === selectedTeacher);
+					
+					return matchesSearch && matchesCategory && matchesTeacher;
 				});
 				
 				// จัดเรียงลำดับ (Sort ก-ฮ หรือ ฮ-ก)
