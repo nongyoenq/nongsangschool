@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="th">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="image/x-icon" href="https://school.nongkhai2.go.th/emis/pic_school/1035430040.jpg">
+		<title>โรงเรียนบ้านหนองแสง — Rewards Portfolio</title>
+		<link href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<style>
+			body { font-family: 'K2D', sans-serif; }
+		</style>
+	</head>
+	<body class="bg-gradient-to-br from-blue-100 via-sky-100 to-blue-200 min-h-screen">
+		
+		<img src="https://nongyoenq.github.io/NongsangSchool-SendTasks/NongsangSchool-LOGO1-ver.png" alt="logo" width="500px" height="auto" class="mx-auto hover:scale-105 duration-300 ease-in mb-6">
+		
+		<header class="text-center mb-12">
+			<h1 class="text-4xl font-extrabold text-slate-800 tracking-tight"> 🎉โรงเรียนบ้านหนองแสง <br>Rewards PORTFOLIO️🏅</h1>
+			<h2 class="text-slate-600 mt-2 font-semibold">🏆 รวมผลงานรางวัลและเกียรติบัตรต่างๆ</h2>
+			<p class="text-slate-500 mt-2">สำนักงานเขตพื้นที่การศึกษาประถมศึกษายโสธร เขต 1</p>
+		</header>
+		
+		<div class="max-w-6xl mx-auto bg-white/20 backdrop-blur-sm p-2 rounded-2xl shadow-xl border border-white/100 mb-10 flex flex-col md:flex-row gap-4 items-center justify-between">
+			<a href="index.html" class="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 text-center">↫ Back</a>
+			<div class="w-full md:w-1/4 relative">
+				<input type="text" id="search-input" placeholder="🔍 ค้นหาชื่อนักเรียน,ครู, ชื่องาน, หรือรายละเอียด..." 
+				class="w-full pl-4 pr-4 py-2.5 bg-slate-50/50 border border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-slate-700 transition-all">
+			</div>
+			
+			<div class="w-full md:w-48 md:w-auto flex flex-wrap items-center gap-4">
+				<div class="flex items-center gap-2 w-full sm:w-auto">
+					<span class="text-sm text-slate-600 font-semibold whitespace-nowrap">หมวดหมู่:</span>
+					<select id="filter-select" class="w-full sm:w-auto bg-slate-50 border border-purple-200 rounded-xl px-8 py-2.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+						<option value="all">ทั้งหมด 📁</option>
+					</select>
+				</div>
+				
+				<!-- 👤 🌟 เพิ่ม Dropdown คัดกรองชื่อครูผู้รับผิดชอบ -->
+				<div class="flex items-center gap-2 w-full sm:w-auto">
+					<span class="text-sm text-slate-600 font-semibold whitespace-nowrap">ประเภท:</span>
+					<select id="teacher-select" class="w-full sm:w-auto bg-slate-50 border border-purple-200 rounded-xl px-4 py-2.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+						<option value="all">All Type 👤</option>
+					</select>
+				</div>
+				
+				<div class="flex items-center gap-2 w-full sm:w-auto">
+					<span class="text-sm text-slate-600 font-semibold whitespace-nowrap">เรียงตามวันที่:</span>
+					<select id="sort-select" class="w-full sm:w-auto bg-slate-50 border border-purple-200 rounded-xl px-4 py-2.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+						<option value="za">ล่าสุด ⬆️</option>
+						<option value="az">เก่าสุด ⬇️</option>						
+					</select>
+				</div>
+			</div>
+		</div>
+		
+		<div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+			<div class="text-center col-span-full text-slate-500 py-12 font-medium">กำลังโหลดข้อมูลผลงาน... ⏳</div>
+		</div>
+		
+		<footer class="text-center py-6 mt-10 text-gray-700">
+			<div>Powered by <a href="https://github.com/nongyoenq" target="_blank" class="hover:text-red-600"><b>bayoenq</b></a><br>
+			© Aug 2026 <a href="https://www.facebook.com/Nongyoenq.Studios" target="_blank" class="hover:text-fuchsia-600"><b>Nongyoenq Studios</b></a>, Ltd.</div>
+			<pre class="text-xs text-slate-500">V3R5!0N <b>ɑʃþƒə 0.1</b></pre>
+		</footer>
+		
+		<script>
+			const API_URL = 'https://script.google.com/macros/s/AKfycbw3MrcKYz-eRHGmQmGQ1hXZBiPQ0hAXYydK0nZ4RsWrn3CJQwXaDenQyXAYt4z07fHp/exec';
+			let localDataArray = []; // เก็บข้อมูล Master จาก Sheet ไว้ประมวลผลที่ Client-side
+			
+			fetch(API_URL)
+			.then(res => res.json())
+			.then(data => {
+				localDataArray = data;
+				
+				// 1. ดึงข้อมูล Categoryและชื่อครูผู้รับผิด ไปใส่ใน Filter Dropdown อัตโนมัติ
+				generateCategoryFilter(data);
+				generateTeacherFilter(data);
+				
+				// 2. สั่งแสดงผลเว็บครั้งแรก
+				filterAndRenderGrid();
+				
+				// 3. ผูกฟังก์ชันการกรองข้อมูลเมื่อมีการพิมพ์หรือกดเลือกเงื่อนไข
+				document.getElementById('search-input').addEventListener('input', filterAndRenderGrid);
+				document.getElementById('filter-select').addEventListener('change', filterAndRenderGrid);
+				document.getElementById('sort-select').addEventListener('change', filterAndRenderGrid);
+				document.getElementById('teacher-select').addEventListener('change', filterAndRenderGrid);
+			})
+			.catch(err => {
+				console.error('Error fetching data:', err);
+				document.getElementById('portfolio-grid').innerHTML = `<div class="text-center col-span-full text-red-500 py-12">เกิดข้อผิดพลาดในการโหลดข้อมูล กรุณาตรวจสอบการตั้งค่า Deployment</div>`;
+			});
+			
+			// ฟังก์ชันจัดรูปแบบวันที่แปลงเป็นแบบไทย และบังคับเป็นปี พ.ศ.
+			function formatDate(dateString) {
+				if (!dateString) return 'ไม่ระบุวันที่';
+				
+				const date = new Date(dateString);
+				
+				// ตรวจสอบว่าแปลงเป็น Date Object สำเร็จหรือไม่ ถ้าไม่สำเร็จส่งค่าดิบกลับไป
+				if (isNaN(date)) return dateString; 
+				
+				// ใช้ th-TH เพื่อดึงปี พ.ศ. และรูปแบบไทยอัตโนมัติ
+				return date.toLocaleDateString('th-TH', { 
+					day: '2-digit', 
+					month: 'short', 
+					year: 'numeric' 
+				});
+			}
+			
+			// ฟังก์ชันสร้างตัวเลือกหมวดหมู่จากข้อมูลที่มีจริงในตาราง (ไม่ซ้ำกัน)
+			function generateCategoryFilter(data) {
+				const filterSelect = document.getElementById('filter-select');
+				const categories = [...new Set(data.map(item => item.Category).filter(cat => cat))];
+				
+				categories.forEach(cat => {
+					const option = document.createElement('option');
+					option.value = cat;
+					option.textContent = cat;
+					filterSelect.appendChild(option);
+				});
+			} 
+			
+			// 🌟 ฟังก์ชันสร้างรายชื่อคุณครูผู้รับผิดชอบใส่ใน Dropdown โดยอัตโนมัติจากข้อมูลในตาราง
+			function generateTeacherFilter(data) {
+				const teacherSelect = document.getElementById('teacher-select');
+				const teachers = [...new Set(data.map(item => item.NameTeacher).filter(teacher => teacher))];
+				
+				teachers.forEach(teacher => {
+					const option = document.createElement('option');
+					option.value = teacher;
+					option.textContent = teacher;
+					teacherSelect.appendChild(option);
+				});
+			}
+			
+			// ฟังก์ชันหลักที่ใช้จัดการ Search, Filter และ Sort พร้อมกัน
+			function filterAndRenderGrid() {
+				const searchTerm = document.getElementById('search-input').value.toLowerCase();
+				const selectedCat = document.getElementById('filter-select').value;
+				const sortBy = document.getElementById('sort-select').value;
+				const grid = document.getElementById('portfolio-grid');
+				const selectedTeacher = document.getElementById('teacher-select').value; // 🌟 ดึงค่าชื่อครูที่เลือก
+				
+				// กรองข้อมูล (Search, Category Filter และครอบคลุมถึงชื่อครูด้วย)
+				let processedData = localDataArray.filter(item => {
+					const matchesSearch = 
+					(item.Title && item.Title.toLowerCase().includes(searchTerm)) || 
+					(item.Description && item.Description.toLowerCase().includes(searchTerm)) ||
+					(item.Category && item.Category.toLowerCase().includes(searchTerm)) || 
+					(item.NameTeacher && item.NameTeacher.toLowerCase().includes(searchTerm)); // 🌟 เพิ่มส่วนค้นหาจากชื่อครู
+					
+					const matchesCategory = (selectedCat === 'all' || item.Category === selectedCat);
+					
+					// 🌟 เพิ่มเงื่อนไขตรวจสอบว่าชื่อครูตรงกับที่เลือกใน Dropdown หรือไม่
+					const matchesTeacher = (selectedTeacher === 'all' || item.NameTeacher === selectedTeacher);
+					
+					return matchesSearch && matchesCategory && matchesTeacher;
+				});
+				
+				// จัดเรียงลำดับ (Sort ก-ฮ หรือ ฮ-ก)
+				processedData.sort((a, b) => {
+					if (sortBy === 'az') {
+						return (a.Date || '').localeCompare(b.Date || '', 'th');
+						} else if (sortBy === 'za') {
+						return (b.Date || '').localeCompare(a.Date || '', 'th');
+					}
+					return 0;
+				});
+				
+				if(processedData.length === 0) {
+					grid.innerHTML = `<div class="text-center col-span-full text-slate-600 bg-white/50 backdrop-blur p-12 rounded-2xl shadow border border-slate-100 font-medium">❌ ไม่พบผลงานหรือเกียรติบัตรที่ตรงตามเงื่อนไขที่ค้นหา</div>`;
+					return;
+				}
+				
+				// Render การ์ดลง Grid
+				grid.innerHTML = processedData.map(item => {
+					// ตรวจสอบว่าลิงก์ใน ImageURL เป็น PDF หรือไม่ ถ้าเป็น PDF ให้พรีวิวด้วย iframe ถ้าไม่ใช่ให้แสดงผลเป็น <img> ปกติ
+					const isPdf = item.ImageURL && item.ImageURL.toLowerCase().endsWith('.pdf');
+					
+					let mediaPreviewHtml = '';
+					if (isPdf) {
+						mediaPreviewHtml = `<iframe src="${item.ImageURL}" class="w-full h-56 border-0" loading="lazy"></iframe>`;
+						} else {
+						mediaPreviewHtml = `<img src="${item.ImageURL || 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500'}" class="w-full h-auto object-cover" alt="${item.Title}">`;
+					}
+					
+					return `
+					<div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1 hover:scale-105 hover:bg-gradient-to-r hover:from-rose-100 hover:to-yellow-100 transition-all duration-300 ease-in flex flex-col justify-between">
+					<div>
+					<div class="w-full bg-slate-100 overflow-hidden">
+					${mediaPreviewHtml}
+					</div>
+					
+					<div class="p-6">
+				${item.Category ? `<span class="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded-full border border-purple-200">${item.Category}</span>` : ''}
+				
+				<h2 class="text-xl font-bold text-slate-800 mt-3">${item.Title || 'ไม่ได้ระบุชื่อผลงาน'}</h2>
+				<h3 class="text-slate-700 mt-2 text-sm line-clamp-3">${item.Description || 'ไม่มีคำอธิบายผลงาน'}</h3>
+				
+				<p class="text-slate-500 mt-3 text-xs flex items-center gap-1">
+					📅 <b>วันที่ได้รับ:</b> ${formatDate(item.Date)}
+				</p>
+				
+				<p class="text-purple-600 mt-1 text-xs font-semibold flex items-center gap-1">
+					👤 <b>ประเภท:</b> ${item.NameTeacher || 'ไม่ระบุชื่อ'}
+				</p>
+			</div>
+		</div>
+		
+		<div class="p-6 pt-0">
+			${item.Link ? 
+			`<a href="${item.Link}" target="_blank" class="block w-full text-center bg-slate-950 text-white font-medium py-2.5 rounded-xl hover:bg-gradient-to-r from-amber-400 via-pink-500 to-red-500 transition-all shadow-md">ดูผลงานจริง ↗️</a>` 
+			: `<button disabled class="block w-full text-center bg-slate-100 text-slate-400 font-medium py-2.5 rounded-xl cursor-not-allowed">ไม่มีลิงก์แนบ</button>`
+			}
+		</div>
+	</div>
+	`;
+	}).join('');
+	}
+</script>
+</body>
+</html>
