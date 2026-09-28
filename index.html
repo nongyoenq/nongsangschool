@@ -12,6 +12,9 @@
 		<!-- Tailwind CSS (CDN) -->
 		<script src="https://cdn.tailwindcss.com"></script>
 		
+		<!-- Sweet Alert-->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
 		<style>
 			/*:root { --bg-light: linear-gradient(135deg,#fff7f0 0%,#fff3d6 50%,#fff1c2 100%); }*/
 			:root { --bg-light: linear-gradient(to right, #fffcdc, #d9a7c7);}
@@ -85,7 +88,7 @@
 				<div class="text-center space-y-1">
 					<h2 class="text-lg sm:text-xl text-opacity-90">🔗 รวมลิงค์ไปยังระบบต่างๆ ของ โรงเรียนบ้านหนองแสง</h2>
 					<h3 class="text-sm sm:text-base text-opacity-80">📌 สำนักงานเขตพื้นที่การศึกษาประถมศึกษายโสธร เขต 1</h3>
-					<pre class="text-xs opacity-20">VERSION "OsX 0.2"</pre>
+					<pre class="text-xs opacity-20">VERSION "OsX 0.3"</pre>
 				</div>
 			</header>
 			
@@ -101,8 +104,9 @@
 						<div class="select-wrap">
 							<select id="pageSelect" aria-label="เลือกหน้าเพจ"
 							class="w-full rounded-md px-4 py-3 text-sm sm:text-base focus-ring transition">
-								<option value="https://nongyoenq.github.io/nongsangschool/">🏠 หน้าแรก</option>
+								<option value="index.html">🏠 หน้าแรก</option>
 								<option value="https://docs.google.com/spreadsheets/d/1fOHSWXeL78XAtUN3sm34525hvjrY6F4t26W-DyZqggQ/edit?usp=sharing" target="_blank">👶🏻👦🏻👧🏻 ข้อมูลนักเรียน DMC ปีการศึกษา 2569</option>
+								<option value="https://nongsangschool-budget.web.app" target="_blank"> 🪙🗓️ ระบบบริหารงบประมาณโครงการ ปีการศึกษา 2569</option>
 								<option value="https://nongyoenq.github.io/NongsangSchool-RT-NT-2568/">ℹ️ สรุปผลการทดสอบ RT ชั้น ป. 1 และ NT ชั้น ป. 3 ปีการศึกษา 2568</option>
 								<option value="https://nongyoenq.github.io/NongsangSchool-ONET-Report2568/">👩‍🏫 สรุปผลการทดสอบ O-NET ชั้น ป. 6 ปีการศึกษา 2568</option>
 								<option value="https://nongyoenq.github.io/NongsangSchool-CompetFood/">📚 การแข่งขันทําอาหารคาวหวานเพื่อสุขภาพเชิงธุรกิจ ระดับชั้น ป.4-ป.6 ระดับเขต</option>
@@ -112,6 +116,7 @@
 								<option value="https://docs.google.com/spreadsheets/d/1MTrcD6nm0kyNLfSomcCZ0rUWdmDa0nfvjAVfB5_lhD0/edit?usp=sharing">📞 รวมรหัสผ่านเข้าใช้งานระบบต่างๆ</option>
 								<option value="https://nongyoenq.github.io/NongsangSchool-SendBookOrder">💻 ระบบส่งหนังสือราชการ/คำสั่งโรงเรียน</option>
 								<option value="cert.html">👩🏻‍🏫🎖️รางวัล/เกียรติบัตรครูและบุคลากรทางการศึกษา 🏆🍵</option>
+								<option value="#">🗺️📌แผนผังโรงเรียนบ้านหนองแสง🗾📍</option>
 								<!--	
 									<option value="student-portal.html">🧑‍🎓 พอร์ทนักเรียน</option>
 									<option value="teacher-portal.html">🧑‍🏫 พอร์ทครู</option>
@@ -120,7 +125,7 @@
 						</div>
 						
 						<div class="mt-2">
-							<button id="goButton" type="submit">
+							<button id="goButton" type="submit" onclick="submitForm()">
 							<!--class="w-full rounded-md px-4 py-3 bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition focus-ring"
 							aria-label="ไปยังหน้าเพจที่เลือก"-->
 								GO! 🚀
@@ -134,10 +139,10 @@
 												
 						<div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
 							<a href="https://www.facebook.com/NongsangSchool.yst1/" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy" target="_blank">📰 ข่าวล่าสุด</a>
-							<a href="#calendar.html" class="text-center py-2 rounded-md bg-transparen transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy">📅 ปฏิทินกิจกรรม</a>
+							<a href="#calendar.html" class="text-center py-2 rounded-md bg-transparen transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy">📅 PR Newsletter</a>
 							<a href="mailto: nongsangschool.yst1@gmail.com" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy">📞 ติดต่อ</a>
 							<a href="https://www.facebook.com/NongsangSchool.yst1/photos" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  target="_blank">📷 แกลเลอรี</a>
-							<a href="rewards.html" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  >🏆 รางวัล/เกียรติบัตร</a>
+							<a href="achievements.html" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  >🏆 รางวัล/เกียรติบัตร</a>
 							<a href="https://school.yst1.go.th/index_view_history.php?School_ID=1035430040&page=history" class="text-center py-2 rounded-md bg-transparent transition hover:text-yellow-500 hover:decoration-red-600 hover:underline decoration-wavy"  target="_blank">🏫 ประวัติโรงเรียน</a>
 						</div>
 					</form>
