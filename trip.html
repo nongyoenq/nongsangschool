@@ -1,1 +1,459 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="icon" type="image/x-icon"
+      href="https://raw.githubusercontent.com/nongyoenq/archived/e4a859f2b8aaffeac189d73d38b4d2407c4ce86a/img/NS-newLogo-removedBG-01.svg">
+<title>สรุปผลโหวตสถานที่ทัศนศึกษา ปีการศึกษา 2569 | โรงเรียนบ้านหนองแสง</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--text:#1e293b;--muted:#64748b;--primary:#4f46e5;--radius:18px;--shadow:0 10px 30px rgba(30,41,59,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Prompt',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1200px;margin:0 auto;padding:24px}
 
+/* Header */
+header{background:linear-gradient(135deg,#4f46e5,#7c3aed 55%,#db2777);color:#fff;border-radius:24px;padding:32px;position:relative;overflow:hidden;box-shadow:var(--shadow);animation:fadeDown .8s ease}
+header::before,header::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+header::before{width:320px;height:320px;right:-90px;top:-140px}
+header::after{width:180px;height:180px;right:160px;bottom:-110px}
+.badge{display:inline-block;background:rgba(255,255,255,.2);padding:4px 14px;border-radius:999px;font-size:.85rem;margin-bottom:10px}
+header h1{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700}
+header p{opacity:.9;font-weight:300}
+.actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.btn{border:none;cursor:pointer;font-family:inherit;padding:8px 16px;border-radius:10px;font-size:.9rem;transition:.2s}
+.btn-light{background:rgba(255,255,255,.2);color:#fff}
+.btn-light:hover{background:rgba(255,255,255,.35);transform:translateY(-2px)}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:24px 0}
+.kpi{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;transition:.25s}
+.kpi:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(30,41,59,.12)}
+.kpi .ico{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-size:1.7rem;flex-shrink:0}
+.kpi .label{color:var(--muted);font-size:.85rem}
+.kpi .value{font-size:1.7rem;font-weight:700;line-height:1.2}
+.kpi .sub{font-size:.8rem;color:var(--muted)}
+
+/* Cards */
+.grid-2{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;margin-bottom:20px}
+@media(max-width:880px){.grid-2{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.grid-2 .card{margin-bottom:0}
+.card h2{font-size:1.15rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.desc{color:var(--muted);font-size:.85rem;margin-bottom:18px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.toggle{display:inline-flex;background:#eef0f7;border-radius:10px;padding:3px}
+.toggle button{border:none;background:none;font-family:inherit;padding:6px 12px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:.82rem;transition:.2s}
+.toggle button.on{background:#fff;color:var(--primary);font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+
+/* Podium */
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;height:320px}
+.pod{flex:1;max-width:170px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:.3s}
+.pod .emoji{font-size:2.7rem;opacity:0;transform:scale(0);transition:.5s cubic-bezier(.3,1.6,.5,1)}
+.pod.up .emoji{opacity:1;transform:scale(1);animation:bounce 2.4s 1.2s infinite}
+.pod .pname{font-size:.8rem;text-align:center;font-weight:500;margin:4px 0 6px;min-height:40px}
+.pod .block{width:100%;border-radius:14px 14px 0 0;display:flex;flex-direction:column;align-items:center;padding-top:12px;color:#fff;height:0;overflow:hidden;transition:height 1.2s cubic-bezier(.2,.9,.3,1.15)}
+.pod .rank{font-size:2rem;font-weight:700;line-height:1}
+.pod .pv{font-size:.85rem;opacity:.95}
+.pod.first .block{box-shadow:0 0 0 0 rgba(245,158,11,.6);animation:glow 2s 1.5s infinite}
+.crown{font-size:1.6rem;margin-bottom:-6px;opacity:0;transition:.4s 1.3s}
+.pod.up .crown{opacity:1}
+
+/* Donut */
+.donut-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center}
+.donut{position:relative;width:240px;height:240px}
+.donut svg{width:100%;height:100%}
+.seg{fill:none;stroke-width:34;cursor:pointer;transition:stroke-dasharray 1.3s cubic-bezier(.4,0,.2,1),stroke-width .2s,opacity .2s}
+.seg:hover,.seg.active{stroke-width:44}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:60px}
+.donut-center .big{font-size:2rem;font-weight:700;line-height:1.1}
+.donut-center .small{font-size:.78rem;color:var(--muted)}
+.legend{list-style:none;display:flex;flex-direction:column;gap:6px;min-width:200px}
+.legend li{display:flex;align-items:center;gap:8px;font-size:.85rem;cursor:pointer;padding:4px 8px;border-radius:8px;transition:.2s}
+.legend li:hover,.legend li.active{background:#f1f3f9}
+.dot{width:12px;height:12px;border-radius:4px;flex-shrink:0}
+.legend .lv{margin-left:auto;font-weight:600}
+
+/* Bars */
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-row{display:grid;grid-template-columns:minmax(150px,300px) 1fr 70px;gap:12px;align-items:center;cursor:pointer;padding:6px 8px;border-radius:12px;transition:.25s;animation:fadeUp .5s both}
+.bar-row:hover,.bar-row.active{background:#f6f7fb}
+.bar-label{display:flex;align-items:center;gap:10px;font-size:.88rem}
+.bar-label .em{font-size:1.4rem}
+.bar-label small{display:block;color:var(--muted);font-size:.75rem}
+.track{height:26px;background:#eef0f7;border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:999px;transition:width 1.2s cubic-bezier(.2,.8,.2,1);position:relative}
+.fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:shine 2.5s 1.3s infinite}
+.bar-val{font-weight:700;text-align:right}
+@media(max-width:600px){.bar-row{grid-template-columns:1fr 60px}.track{grid-column:1/-1;grid-row:2}}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{text-align:left;color:var(--muted);font-weight:500;padding:10px 8px;border-bottom:2px solid #eef0f7;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--primary)}
+td{padding:10px 8px;border-bottom:1px solid #f1f3f9}
+tr.row{transition:.2s;cursor:pointer}
+tr.row:hover,tr.row.active{background:#f6f7fb}
+.medal{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font-weight:700;font-size:.8rem;background:#eef0f7}
+.m1{background:#fde68a;color:#92400e}.m2{background:#e2e8f0;color:#334155}.m3{background:#fed7aa;color:#9a3412}
+.mini{height:8px;background:#eef0f7;border-radius:99px;overflow:hidden;min-width:80px}
+.mini span{display:block;height:100%;border-radius:99px}
+
+/* Insights */
+.insights{display:flex;flex-direction:column;gap:12px}
+.ins{display:flex;gap:12px;padding:14px;border-radius:14px;background:#f8f9fd;border-left:4px solid var(--c,#4f46e5);animation:fadeUp .6s both}
+.ins .i{font-size:1.4rem}
+.ins b{color:var(--c,#4f46e5)}
+.cat{margin-top:4px}
+.cat-row{display:grid;grid-template-columns:150px 1fr 90px;gap:10px;align-items:center;font-size:.85rem;margin:8px 0}
+.cat-row .track{height:14px}
+
+.dim{opacity:.3!important}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 0 30px}
+
+/* Tooltip */
+#tip{position:fixed;pointer-events:none;background:#1e293b;color:#fff;padding:8px 12px;border-radius:10px;font-size:.82rem;opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;z-index:99;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:98}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:.7s ease}
+.reveal.show{opacity:1;transform:none}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shine{to{transform:translateX(100%)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(245,158,11,.6)}70%{box-shadow:0 0 0 14px rgba(245,158,11,0)}100%{box-shadow:0 0 0 0 rgba(245,158,11,0)}}
+
+@media print{
+  body{background:#fff}.actions,#tip,#confetti{display:none}
+  .card,.kpi{box-shadow:none;border:1px solid #e2e8f0;break-inside:avoid}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="tip"></div>
+
+<div class="container">
+  <header>
+    <span class="badge">📋 รายงานสรุปผลการโหวต</span>
+    <h1>🚌 สถานที่ทัศนศึกษา ปีการศึกษา 2569</h1>
+    <p>โรงเรียนบ้านหนองแสง • ใช้ประกอบการพิจารณาของผู้บริหารและผู้ปกครองนักเรียน</p>
+    <div class="actions">
+      <button class="btn btn-light" onclick="celebrate()">🎉 ประกาศผลผู้ชนะ</button>
+      <button class="btn btn-light" onclick="clearSelect()">🔄 ล้างการเลือก</button>
+      <button class="btn btn-light" onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF</button>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <div class="grid-2">
+    <div class="card reveal">
+      <h2>🏆 3 อันดับแรก</h2>
+      <p class="desc">สถานที่ที่นักเรียนโหวตให้มากที่สุด (คลิกเพื่อดูรายละเอียด)</p>
+      <div class="podium" id="podium"></div>
+    </div>
+    <div class="card reveal">
+      <h2>🍩 สัดส่วนคะแนนเสียง</h2>
+      <p class="desc">ชี้หรือคลิกที่กราฟ/รายการเพื่อดูสัดส่วนของแต่ละสถานที่</p>
+      <div class="donut-wrap">
+        <div class="donut">
+          <svg viewBox="0 0 240 240" id="donutSvg"></svg>
+          <div class="donut-center" id="donutCenter"></div>
+        </div>
+        <ul class="legend" id="legend"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card reveal" id="barCard">
+    <div class="card-head">
+      <div>
+        <h2>📊 เปรียบเทียบคะแนนโหวตทุกสถานที่</h2>
+        <p class="desc">เรียงลำดับและเลือกหน่วยแสดงผลได้</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="toggle" id="sortToggle">
+          <button data-v="desc" class="on">มาก → น้อย</button>
+          <button data-v="asc">น้อย → มาก</button>
+          <button data-v="orig">ลำดับเดิม</button>
+        </div>
+        <div class="toggle" id="unitToggle">
+          <button data-v="votes" class="on">จำนวนคน</button>
+          <button data-v="pct">ร้อยละ</button>
+        </div>
+      </div>
+    </div>
+    <div class="bars" id="bars"></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card reveal">
+      <h2>📋 ตารางสรุปผล</h2>
+      <p class="desc">คลิกที่หัวตารางเพื่อเรียงลำดับ</p>
+      <div style="overflow-x:auto"><table id="table"></table></div>
+    </div>
+    <div class="card reveal">
+      <h2>💡 ข้อสังเกตและข้อเสนอแนะ</h2>
+      <p class="desc">สรุปประเด็นสำคัญเพื่อประกอบการตัดสินใจ</p>
+      <div class="insights" id="insights"></div>
+      <div class="cat" id="cats"></div>
+    </div>
+  </div>
+
+  <footer>ข้อมูลจากการโหวตของนักเรียนโรงเรียนบ้านหนองแสง ปีการศึกษา 2569 • ผู้ร่วมโหวตทั้งหมด <span id="ftTotal"></span> คน
+  <p>developed by bayoenq</p>
+  </footer>
+</div>
+
+<script>
+/* ===== ข้อมูล (แก้ไขตัวเลขตรงนี้ได้เลย) ===== */
+const DATA = [
+  {id:1, name:'สวนสัตว์อุบลราชธานี', full:'สวนสัตว์ จังหวัดอุบลราชธานี', prov:'อุบลราชธานี', votes:3, icon:'🦒', color:'#10b981', cat:'สัตว์และธรรมชาติ'},
+  {id:2, name:'สะพานมิตรภาพไทย–ลาว แห่งที่ 2', full:'สะพานมิตรภาพไทย–ลาว แห่งที่ 2 จังหวัดมุกดาหาร', prov:'มุกดาหาร', votes:2, icon:'🌉', color:'#3b82f6', cat:'คมนาคมและการเดินทาง'},
+  {id:3, name:'พิพิธภัณฑ์ไดโนเสาร์', full:'พิพิธภัณฑ์ไดโนเสาร์ จังหวัดกาฬสินธุ์', prov:'กาฬสินธุ์', votes:8, icon:'🦖', color:'#8b5cf6', cat:'วิทยาศาสตร์และการเรียนรู้'},
+  {id:4, name:'ศูนย์วิทยาศาสตร์ฯ ร้อยเอ็ด', full:'ศูนย์วิทยาศาสตร์และวัฒนธรรมเพื่อการศึกษาร้อยเอ็ด', prov:'ร้อยเอ็ด', votes:1, icon:'🔬', color:'#ec4899', cat:'วิทยาศาสตร์และการเรียนรู้'},
+  {id:5, name:'สถานีรถไฟศรีสะเกษ', full:'สถานีรถไฟศรีสะเกษ จังหวัดศรีสะเกษ', prov:'ศรีสะเกษ', votes:6, icon:'🚂', color:'#ef4444', cat:'คมนาคมและการเดินทาง'},
+  {id:6, name:'หมู่บ้านช้างสุรินทร์', full:'หมู่บ้านช้าง จังหวัดสุรินทร์', prov:'สุรินทร์', votes:11, icon:'🐘', color:'#f59e0b', cat:'สัตว์และธรรมชาติ'}
+];
+
+/* ===== คำนวณ ===== */
+const TOTAL = DATA.reduce((s,d)=>s+d.votes,0);
+DATA.forEach(d=>{
+  d.pct = d.votes/TOTAL*100;
+  d.rank = 1 + DATA.filter(x=>x.votes>d.votes).length;
+});
+const SORTED = [...DATA].sort((a,b)=>b.votes-a.votes);
+const MAX = SORTED[0].votes;
+const byId = id => DATA.find(d=>d.id===id);
+const fmt = (n,dec=1)=>n.toLocaleString('th-TH',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+let selected = null;
+
+/* ===== ตัวช่วย ===== */
+function countUp(el,target,dur=1400,dec=0,suffix=''){
+  const t0=performance.now();
+  (function step(t){
+    const p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
+    el.textContent=fmt(target*e,dec)+suffix;
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}
+const tip=document.getElementById('tip');
+function showTip(e,d){
+  tip.innerHTML=`<b>${d.icon} ${d.full}</b><br>อันดับ ${d.rank} • ${d.votes} คน • ${fmt(d.pct)}%`;
+  tip.classList.add('show');moveTip(e);
+}
+function moveTip(e){tip.style.left=Math.min(e.clientX+14,innerWidth-270)+'px';tip.style.top=(e.clientY+14)+'px'}
+function hideTip(){tip.classList.remove('show')}
+function bindHover(el,d){
+  el.addEventListener('mouseenter',e=>showTip(e,d));
+  el.addEventListener('mousemove',moveTip);
+  el.addEventListener('mouseleave',hideTip);
+  el.addEventListener('click',()=>select(d.id));
+}
+
+/* ===== KPI ===== */
+function renderKPIs(){
+  const w=SORTED[0], s=SORTED[1];
+  const top3=SORTED.slice(0,3).reduce((a,d)=>a+d.votes,0);
+  const items=[
+    {ico:'🗳️',bg:'#eef2ff',label:'ผู้ร่วมโหวตทั้งหมด',val:TOTAL,suf:' คน',sub:`จาก ${DATA.length} สถานที่ให้เลือก`},
+    {ico:w.icon,bg:'#fef3c7',label:'อันดับ 1',val:w.votes,suf:' คน',sub:w.name,txt:true},
+    {ico:'📈',bg:'#dcfce7',label:'ส่วนแบ่งคะแนนของอันดับ 1',val:w.pct,dec:1,suf:'%',sub:`นำอันดับ 2 อยู่ ${w.votes-s.votes} คะแนน`},
+    {ico:'🥇',bg:'#fce7f3',label:'รวมคะแนน 3 อันดับแรก',val:top3/TOTAL*100,dec:1,suf:'%',sub:`${top3} จาก ${TOTAL} คน`}
+  ];
+  const box=document.getElementById('kpis');
+  box.innerHTML=items.map((k,i)=>`
+    <div class="kpi" style="animation:fadeUp .6s ${i*.12}s both">
+      <div class="ico" style="background:${k.bg}">${k.ico}</div>
+      <div><div class="label">${k.label}</div>
+      <div class="value" data-i="${i}">0</div>
+      <div class="sub">${k.sub}</div></div>
+    </div>`).join('');
+  items.forEach((k,i)=>countUp(box.querySelector(`[data-i="${i}"]`),k.val,1500,k.dec||0,k.suf));
+  document.getElementById('ftTotal').textContent=TOTAL;
+}
+
+/* ===== Podium ===== */
+function renderPodium(){
+  const top=SORTED.slice(0,3), order=[top[1],top[0],top[2]], h=[150,200,110];
+  const el=document.getElementById('podium');
+  el.innerHTML=order.map(d=>`
+    <div class="pod ${d===top[0]?'first':''}" data-id="${d.id}">
+      ${d===top[0]?'<div class="crown">👑</div>':''}
+      <div class="emoji">${d.icon}</div>
+      <div class="pname">${d.name}<br><small style="color:var(--muted)">จ.${d.prov}</small></div>
+      <div class="block" style="background:linear-gradient(180deg,${d.color},${d.color}cc)">
+        <div class="rank">${d.rank}</div><div class="pv">${d.votes} คน</div><div class="pv">${fmt(d.pct)}%</div>
+      </div>
+    </div>`).join('');
+  el.querySelectorAll('.pod').forEach(p=>bindHover(p,byId(+p.dataset.id)));
+  el._animate=()=>el.querySelectorAll('.pod').forEach((p,i)=>{
+    const d=byId(+p.dataset.id), hi=h[order.indexOf(d)];
+    setTimeout(()=>{p.classList.add('up');p.querySelector('.block').style.height=hi+'px'},[300,0,600][i]);
+  });
+}
+
+/* ===== Donut ===== */
+const R=85, C=2*Math.PI*R;
+function renderDonut(){
+  const svg=document.getElementById('donutSvg');
+  let off=0, html=`<circle cx="120" cy="120" r="${R}" fill="none" stroke="#eef0f7" stroke-width="34"/>`;
+  SORTED.forEach(d=>{
+    const len=d.votes/TOTAL*C;
+    html+=`<circle class="seg" data-id="${d.id}" data-len="${len}" cx="120" cy="120" r="${R}" stroke="${d.color}"
+      stroke-dasharray="0 ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 120 120)"/>`;
+    off+=len;
+  });
+  svg.innerHTML=html;
+  svg.querySelectorAll('.seg').forEach(s=>bindHover(s,byId(+s.dataset.id)));
+  document.getElementById('legend').innerHTML=SORTED.map(d=>`
+    <li data-id="${d.id}"><span class="dot" style="background:${d.color}"></span>${d.icon} ${d.name}<span class="lv">${fmt(d.pct)}%</span></li>`).join('');
+  document.querySelectorAll('#legend li').forEach(li=>bindHover(li,byId(+li.dataset.id)));
+  updateCenter();
+  svg._animate=()=>svg.querySelectorAll('.seg').forEach((s,i)=>{
+    s.style.transitionDelay=(i*.15)+'s';
+    const l=+s.dataset.len;
+    requestAnimationFrame(()=>s.setAttribute('stroke-dasharray',`${Math.max(l-2,1)} ${C-l+2}`));
+  });
+}
+function updateCenter(){
+  const c=document.getElementById('donutCenter');
+  if(!selected){c.innerHTML=`<div class="small">ผู้โหวตทั้งหมด</div><div class="big">${TOTAL}</div><div class="small">คน</div>`;return}
+  const d=byId(selected);
+  c.innerHTML=`<div style="font-size:1.6rem">${d.icon}</div><div class="big" style="color:${d.color}">${fmt(d.pct)}%</div><div class="small">${d.votes} คน • อันดับ ${d.rank}</div>`;
+}
+
+/* ===== Bars ===== */
+let sortMode='desc', unit='votes';
+function renderBars(){
+  let list=[...DATA];
+  if(sortMode==='desc')list.sort((a,b)=>b.votes-a.votes);
+  if(sortMode==='asc')list.sort((a,b)=>a.votes-b.votes);
+  const el=document.getElementById('bars');
+  el.innerHTML=list.map((d,i)=>`
+    <div class="bar-row" data-id="${d.id}" style="animation-delay:${i*.08}s">
+      <div class="bar-label"><span class="em">${d.icon}</span><div>${d.name}<small>จ.${d.prov} • อันดับ ${d.rank}</small></div></div>
+      <div class="track"><div class="fill" style="background:linear-gradient(90deg,${d.color}aa,${d.color})" data-w="${d.votes/MAX*100}"></div></div>
+      <div class="bar-val" style="color:${d.color}">${unit==='votes'?d.votes+' คน':fmt(d.pct)+'%'}</div>
+    </div>`).join('');
+  el.querySelectorAll('.bar-row').forEach(r=>bindHover(r,byId(+r.dataset.id)));
+  if(el._shown)animateBars();
+  applySelect();
+}
+function animateBars(){
+  const el=document.getElementById('bars');el._shown=true;
+  el.querySelectorAll('.fill').forEach((f,i)=>setTimeout(()=>f.style.width=f.dataset.w+'%',100+i*90));
+}
+function setupToggle(id,cb){
+  document.querySelectorAll(`#${id} button`).forEach(b=>b.onclick=()=>{
+    document.querySelectorAll(`#${id} button`).forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');cb(b.dataset.v);renderBars();
+  });
+}
+
+/* ===== Table ===== */
+let tSort={key:'votes',dir:-1};
+function renderTable(){
+  const list=[...DATA].sort((a,b)=>{
+    const A=a[tSort.key],B=b[tSort.key];
+    return (typeof A==='string'?A.localeCompare(B,'th'):A-B)*tSort.dir;
+  });
+  const arrow=k=>tSort.key===k?(tSort.dir>0?' ▲':' ▼'):'';
+  document.getElementById('table').innerHTML=`
+    <thead><tr><th data-k="rank">อันดับ${arrow('rank')}</th><th data-k="name">สถานที่${arrow('name')}</th>
+    <th data-k="prov">จังหวัด${arrow('prov')}</th><th data-k="votes">คะแนน${arrow('votes')}</th><th data-k="pct">ร้อยละ${arrow('pct')}</th></tr></thead>
+    <tbody>${list.map(d=>`
+      <tr class="row" data-id="${d.id}">
+        <td><span class="medal ${d.rank<=3?'m'+d.rank:''}">${d.rank}</span></td>
+        <td>${d.icon} ${d.name}</td><td>${d.prov}</td><td><b>${d.votes}</b></td>
+        <td><div style="display:flex;align-items:center;gap:8px"><div class="mini" style="flex:1"><span style="width:${d.pct/SORTED[0].pct*100}%;background:${d.color}"></span></div>${fmt(d.pct)}%</div></td>
+      </tr>`).join('')}
+      <tr><td></td><td><b>รวม</b></td><td></td><td><b>${TOTAL}</b></td><td><b>100%</b></td></tr>
+    </tbody>`;
+  document.querySelectorAll('#table th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k;
+    tSort={key:k,dir:tSort.key===k?-tSort.dir:(k==='name'||k==='prov'||k==='rank'?1:-1)};
+    renderTable();
+  });
+  document.querySelectorAll('#table tr.row').forEach(r=>bindHover(r,byId(+r.dataset.id)));
+  applySelect();
+}
+
+/* ===== Insights ===== */
+function renderInsights(){
+  const [a,b,c]=SORTED;
+  const surin=byId(6), ssk=byId(5);
+  const combo=surin.votes+ssk.votes;
+  const ins=[
+    {i:'🏆',c:a.color,t:`<b>${a.full}</b> ได้รับคะแนนสูงสุด <b>${a.votes} คน (${fmt(a.pct)}%)</b> นำอันดับ 2 (${b.name}) อยู่ ${a.votes-b.votes} คะแนน`},
+    {i:'⚖️',c:'#6366f1',t:`ไม่มีสถานที่ใดได้คะแนนเกินครึ่ง (เกิน ${Math.floor(TOTAL/2)} คน) จึงควรเตรียม <b>${b.name}</b> ไว้เป็นตัวเลือกสำรอง`},
+    {i:'🥉',c:'#10b981',t:`3 อันดับแรกรวมกันได้ <b>${fmt((a.votes+b.votes+c.votes)/TOTAL*100)}%</b> ของคะแนนทั้งหมด แสดงว่านักเรียนส่วนใหญ่สนใจไปทางเดียวกัน`},
+    {i:'🗺️',c:'#ef4444',t:`ข้อเสนอ: สุรินทร์กับศรีสะเกษเป็นจังหวัดติดกัน ถ้าจัดเส้นทาง <b>หมู่บ้านช้าง + สถานีรถไฟศรีสะเกษ</b> จะตรงกับความต้องการของนักเรียน <b>${combo} คน (${fmt(combo/TOTAL*100)}%)</b> ซึ่งเกินครึ่ง`},
+    {i:'📝',c:'#64748b',t:`ข้อควรพิจารณาเพิ่ม: ระยะทาง ความปลอดภัย งบประมาณ และความเหมาะสมกับวัยของนักเรียน`}
+  ];
+  document.getElementById('insights').innerHTML=ins.map((x,i)=>`
+    <div class="ins" style="--c:${x.c};animation-delay:${i*.1}s"><span class="i">${x.i}</span><div>${x.t}</div></div>`).join('');
+
+  const cats={};DATA.forEach(d=>cats[d.cat]=(cats[d.cat]||0)+d.votes);
+  const colors={'สัตว์และธรรมชาติ':'#f59e0b','วิทยาศาสตร์และการเรียนรู้':'#8b5cf6','คมนาคมและการเดินทาง':'#3b82f6'};
+  const cmax=Math.max(...Object.values(cats));
+  document.getElementById('cats').innerHTML=`<h3 style="font-size:.95rem;margin:18px 0 6px">🧩 ความสนใจแยกตามประเภท</h3>`+
+    Object.entries(cats).sort((x,y)=>y[1]-x[1]).map(([k,v])=>`
+    <div class="cat-row"><span>${k}</span><div class="track"><div class="fill" style="background:${colors[k]}" data-w="${v/cmax*100}"></div></div>
+    <b style="text-align:right">${v} คน (${fmt(v/TOTAL*100)}%)</b></div>`).join('');
+}
+
+/* ===== การเลือก (เชื่อมทุกกราฟ) ===== */
+function select(id){selected=(selected===id)?null:id;applySelect();updateCenter();}
+function clearSelect(){selected=null;applySelect();updateCenter();}
+function applySelect(){
+  document.querySelectorAll('[data-id]').forEach(el=>{
+    const on=selected&&+el.dataset.id===selected;
+    el.classList.toggle('active',!!on);
+    el.classList.toggle('dim',!!selected&&!on);
+  });
+}
+
+/* ===== Confetti ===== */
+function celebrate(){
+  const cv=document.getElementById('confetti'),ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const cols=DATA.map(d=>d.color);
+  const ps=Array.from({length:180},()=>({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.5,
+    vx:(Math.random()-.5)*4,vy:2+Math.random()*4,s:5+Math.random()*7,r:Math.random()*6,vr:(Math.random()-.5)*.3,
+    c:cols[Math.floor(Math.random()*cols.length)]}));
+  const t0=performance.now();
+  (function frame(t){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.r+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);ctx.restore();});
+    if(t-t0<3500)requestAnimationFrame(frame);else ctx.clearRect(0,0,cv.width,cv.height);
+  })(t0);
+  select(SORTED[0].id);if(selected!==SORTED[0].id)select(SORTED[0].id);
+}
+
+/* ===== เริ่มทำงาน ===== */
+renderKPIs();renderPodium();renderDonut();renderBars();renderTable();renderInsights();
+setupToggle('sortToggle',v=>sortMode=v);
+setupToggle('unitToggle',v=>unit=v);
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target;el.classList.add('show');
+  if(el.querySelector('#podium'))document.getElementById('podium')._animate();
+  if(el.querySelector('#donutSvg'))document.getElementById('donutSvg')._animate();
+  if(el.id==='barCard')animateBars();
+  if(el.querySelector('#cats'))el.querySelectorAll('#cats .fill').forEach((f,i)=>setTimeout(()=>f.style.width=f.dataset.w+'%',300+i*150));
+  io.unobserve(el);
+}),{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+setTimeout(celebrate,1800);
+</script>
+</body>
+</html>
